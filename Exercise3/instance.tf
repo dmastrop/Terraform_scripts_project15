@@ -23,7 +23,7 @@ resource "aws_instance" "exercise3-project15" {
   #security_group_id= "sg-014077e3dfc5d17d2"
 
   tags = {
-    Name    = "terraform-project15-instance2"
+    Name    = "terraform-project15-instance3"
     Project = "15"
   }
 
