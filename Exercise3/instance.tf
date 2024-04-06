@@ -37,7 +37,7 @@ resource "aws_instance" "exercise3-project15" {
   # remote-exec provisioner to execute the script remotely on the EC2 instance
   provisioner "remote-exec" {
     inline = [
-        "chmod u+x /tmp/web.sh"
+        "chmod u+x /tmp/web.sh",
         "sudo /tmp/web.sh"
     ]
   }
