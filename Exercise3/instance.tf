@@ -1,9 +1,9 @@
 resource "aws_key_pair" "keypair-terraform-project15" {
-    # this title is just the name of the resource not the keyname
-    key_name = "keypair3-terraform-project15"
-    # this is the keyname that want to attach to this EC2 instance
-    pubic_key = file("keypair3-terraform-project15.pub")
-    # this will read from the current directory where this file is and get the public key file contents and assign them to public_key
+  # this title is just the name of the resource not the keyname
+  key_name = "keypair3-terraform-project15"
+  # this is the keyname that want to attach to this EC2 instance
+  public_key = file("keypair3-terraform-project15.pub")
+  # this will read from the current directory where this file is and get the public key file contents and assign them to public_key
 }
 
 resource "aws_instance" "exercise3-project15" {
@@ -17,7 +17,7 @@ resource "aws_instance" "exercise3-project15" {
   # keypair to the EC2 instance
   # We can now access this through "keypair3-terraform-project15" above
   # Better to access parameter through the resource
-  key_name = aws_key_pair.keypair3-terraform-project15.key_name
+  key_name = aws_key_pair.keypair-terraform-project15.key_name
 
   vpc_security_group_ids = ["sg-014077e3dfc5d17d2"]
   #security_group_id= "sg-014077e3dfc5d17d2"
@@ -37,15 +37,15 @@ resource "aws_instance" "exercise3-project15" {
   # remote-exec provisioner to execute the script remotely on the EC2 instance
   provisioner "remote-exec" {
     inline = [
-        "chmod u+x /tmp/web.sh",
-        "sudo /tmp/web.sh"
+      "chmod u+x /tmp/web.sh",
+      "sudo /tmp/web.sh"
     ]
   }
 
 
   # this is the connection details for the provisioners above  
   connection {
-    user = var.USER
+    user        = var.USER
     private_key = file("keypair3-terraform-project15")
     # this is from local ccurrent directory where we are executing terraform
     host = self.public_ip

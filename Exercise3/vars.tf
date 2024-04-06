@@ -17,6 +17,6 @@ variable "AMIS" {
 }
 
 variable "USER" {
-    default = "ec2-user"
-    # this is an amazon linux EC2 instance and not ubuntu
+  default = "ec2-user"
+  # this is an amazon linux EC2 instance and not ubuntu
 }
