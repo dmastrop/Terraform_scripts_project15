@@ -19,9 +19,8 @@ resource "aws_instance" "exercise3-project15" {
   # Better to access parameter through the resource
   key_name = aws_key_pair.keypair-terraform-project15.key_name
 
-  #vpc_security_group_ids = ["sg-014077e3dfc5d17d2"]
-  #security_group_id= "sg-014077e3dfc5d17d2"
   vpc_security_group_ids = ["sg-014077e3dfc5d17d2"]
+  #security_group_id= "sg-014077e3dfc5d17d2"
 
   tags = {
     Name    = "terraform-project15-instance3"
@@ -52,4 +51,12 @@ resource "aws_instance" "exercise3-project15" {
     host = self.public_ip
     # it will use the public ip assigned to the instance created by the resource above
   }
+}
+
+output "PublicIP" {
+  value = aws_instance.exercise3-project15.public_ip
+}
+
+output "PrivateIP" {
+  value = aws_instance.exercise3-project15.private_ip
 }
