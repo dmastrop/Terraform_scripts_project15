@@ -32,7 +32,34 @@ resource "aws_instance" "aws-instance1-project15-excercise6" {
     Name    = "terraform-project15-exercise6-instance1"
     Project = "15"
   }
+
+
+  # Next provision this instance. Put the shell script in the /tmp directory of the EC2 instance
+  provisioner "file" {
+    source = "web.sh"
+    # this is the shell script in root
+    destination = "/tmp/web.sh"
+  }
+
+  # remote-exec provisioner to execute the script remotely on the EC2 instance
+  provisioner "remote-exec" {
+    inline = [
+      "chmod u+x /tmp/web.sh",
+      "sudo /tmp/web.sh"
+    ]
+  }
+
+  # this is the connection details for the provisioners above  
+  connection {
+    user        = var.USER
+    private_key = file(var.PRIV_KEY)
+    #private_key = file("keypair3-terraform-project15")
+    # this is from local ccurrent directory where we are executing terraform
+    host = self.public_ip
+    # it will use the public ip assigned to the instance created by the resource above
+  }
 }
+
 
 
 # create a volumne
@@ -52,6 +79,8 @@ resource "aws_volume_attachment" "attach-volume1-instance1-project15-excercise6"
     volume_id = aws_ebs_volume.ebs-volume1-vprofile-project15-exercise6.id
     instance_id = aws_instance.aws-instance1-project15-excercise6.id
 }
+
+# note elastic ip can be done the same way, define elastic IP and then attach it to the instance with instance_id
 
 #   # Next provision this instance. Put the shell script in the /tmp directory of the EC2 instance
 #   provisioner "file" {

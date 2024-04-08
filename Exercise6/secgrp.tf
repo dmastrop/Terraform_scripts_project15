@@ -24,8 +24,17 @@ resource "aws_security_group" "security-group-project15-exercise6" {
         cidr_blocks = [var.my_ip]
     }
 
+    # add port 80 because added back remote provisioner for web app deployment to the aws_instance
+    # See the instance.tf file.
+    ingress {
+        from_port = 80
+        to_port = 80
+        protocol = "tcp"
+        cidr_blocks = [var.my_ip]
+    }
+
     tags = {
-        Name = "allow-ssh-security-group-project15-excercise6"
+        Name = "allow-ssh-and-http-security-group-project15-excercise6"
     }
 
 }
