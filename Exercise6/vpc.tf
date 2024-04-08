@@ -1,3 +1,5 @@
+
+
 resource "aws_vpc" "vpc-project15-exercise6" {
     cidr_block = "10.0.0.0/16"
     instance_tenancy = "default"

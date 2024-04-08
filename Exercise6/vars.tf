@@ -37,3 +37,11 @@ variable PUB_KEY {
 variable PRIV_KEY {
     default = "keypair3-terraform-project15"
 }
+
+variable my_ip {
+    default = "73.202.0.0/16"
+}
+
+# variable vpc_id {
+#     default = "vpc-project15-excercise6"
+# }
